@@ -72,49 +72,51 @@ Quantos são negativos: {numNegativos}");
             Console.ReadKey();
         }
         
-public static void MultDivNums()
-{
-    Console.WriteLine("Escreva o primeiro inteiro");
-
-    if (!int.TryParse(Console.ReadLine(), out int numUm))
-    {
-        Console.WriteLine("Por favor, insira um valor `int` válido.");
-        return;
-    }
-
-    Console.WriteLine("Escreva o segundo inteiro");
-
-    if (!int.TryParse(Console.ReadLine(), out int numDois))
-    {
-        Console.WriteLine("Por favor, insira um valor `int` válido.");
-        return;
-    }
-
-    if (numUm == 0 && numDois == 0)
-    {
-        Console.WriteLine("Ambos os valores não podem ser zero.");
-        return;
-    }
-
-    int mult = 0;
-    int div = 0;
-
-    if (numDois != 0)
-    {
-        int absNum2 = Math.Abs(numDois);
-        int tempNumUm = Math.Abs(numUm); // Valor absoluto de numUm
-
-        while (tempNumUm >= absNum2)
+        public static void MultDivNums()
         {
-            tempNumUm -= absNum2;
-            div++;
+            Console.WriteLine("Escreva o primeiro inteiro");
+            
+            // Inputs e Excessões
+            string inputUm = Console.ReadLine();
+            if (!int.TryParse(inputUm, out int numUm))
+            {
+                Console.WriteLine("Por favor, insira um valor `int`");
+                return;
+            }
+            Console.WriteLine("Escreva o segundo inteiro");
+
+            string inputDois = Console.ReadLine();
+            if (!int.TryParse(Console.ReadLine(), out int numDois))
+            {
+                Console.WriteLine("Por favor, insira um valor `int`");
+                return;
+            }
+            
+            // Caso de zero
+            if (numUm == 0 && numDois == 0)
+            {
+                Console.WriteLine("Ambos valores não podem ser zero");
+                return;
+            }
+
+            // Multiplicação e Divisão
+            int mult = 0;
+            int div = 0;
+
+            if (numDois != 0)
+            {
+                int absNum2 = (numDois > 0) ? numDois : -numDois;
+
+                while (numUm >= absNum2)
+                {
+                    numUm -= absNum2;
+                    div++;
+                }
+                mult = (numDois > 0) ? numUm : -numUm;
+                Console.WriteLine($"Multiplicação: {mult}" +
+                                  $"Divisão Inteira: {div}");
+            }
         }
-
-        mult = (numUm < 0 && numDois > 0) || (numUm > 0 && numDois < 0) ? -tempNumUm : tempNumUm;
-
-        Console.WriteLine($"Multiplicação: {mult}\nDivisão Inteira: {div}");
-    }
-}
 
 
         
@@ -199,10 +201,9 @@ Quantidade de palavras : {quant}");
                 default:
                 {
                     Console.Clear();
-                    Console.WriteLine("Coloque um numero da sequencia.");
+                    Console.WriteLine("Insira um numero da sequencia.");
                     break;
                 }
-
             }
         }
     }
